@@ -1,0 +1,21 @@
+﻿body {
+
+}
+
+
+.left{
+    float:left;
+    width:50%;
+    
+}
+
+
+.right{
+    float:right;
+    width:50%;
+}
+#studentAvatar {
+    height: 150px;
+    width: auto;
+    border-radius: 50%;
+}

@@ -1,0 +1,36 @@
+table[b-l4osubu0i0]{
+    width:100%;
+
+}
+
+img[b-l4osubu0i0]{
+    width:20px;
+    height:20px;
+}
+
+h3[b-l4osubu0i0]{
+    color:red;
+}
+
+ td[b-l4osubu0i0] {
+    border: solid 1px ;
+    padding: 15px;
+    text-align: center;
+    width : 100px;
+    height:80px;
+}
+th[b-l4osubu0i0] {
+    border: solid 1px;
+    text-align: center;
+}
+
+#avatar[b-l4osubu0i0]{
+    height:60px;
+    width:auto;
+    border-radius :50%;
+}
+
+#td-avatar[b-l4osubu0i0]{
+    width:40px;
+    padding :0px;
+}

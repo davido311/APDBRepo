@@ -1,0 +1,21 @@
+body[b-9uqrv2kdza] {
+
+}
+
+
+.left[b-9uqrv2kdza]{
+    float:left;
+    width:50%;
+    
+}
+
+
+.right[b-9uqrv2kdza]{
+    float:right;
+    width:50%;
+}
+#studentAvatar[b-9uqrv2kdza] {
+    height: 150px;
+    width: auto;
+    border-radius: 50%;
+}

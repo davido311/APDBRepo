@@ -1,0 +1,123 @@
+﻿@page "/students"
+@using Cw11.Models
+@using Cw11.Services
+@inject IStudentService StudentService
+@inject NavigationManager navigationManager
+@inject IJSRuntime js
+
+<h3>Students</h3>
+
+
+
+<table id="table1 ">
+    <thead>
+        <tr>
+            <th>Avatar</th>
+           <th @onclick="SortByFirstName"><span class="text">FirstName</span></th>
+            <th @onclick="SortByLastName"><span class="text">LastName</span></th>
+            <th @onclick="SortByBirthDate"><span class="text">BirthDate</span></th>
+            <th @onclick="SortByStudies"><span class="text">Studies</span></th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var st in StudentsList)
+            {
+                <tr>
+                    <td id ="td-avatar"><img id ="avatar" src="@st.Avatar" alt="@st.FirstName @st.LastName" /></td>
+                    <td>@st.FirstName</td>
+                    <td>@st.LastName</td>
+                    <td>@st.BirthDate.ToString("dd/MM/yyyy")</td>
+                    <td>@st.Studies</td>
+                    <td>
+                        <button class="btn btn-secondary" @onclick ="@(()=> OpenDetails(st.IdStudent) )">Open details</button>
+                        <button class="btn btn-danger" @onclick ="@(()=> Delete(st.IdStudent) )">Delete</button>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+
+@code {
+    public IEnumerable<Student> StudentsList { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        StudentsList = StudentService.GetStudents();
+    }
+
+
+    private void OpenDetails(int id)
+    {
+        navigationManager.NavigateTo($"/students/{id}");
+    }
+
+    private async Task  Delete(int id)
+    {
+        if(await js.InvokeAsync<bool>("confirm","Are you sure?"))
+        {
+            StudentService.DeleteStudent(id);
+        }
+
+    }
+
+     private bool order = true;
+        private void SortByFirstName()
+        {
+            if (order == true)
+            {
+                StudentsList = StudentsList.OrderBy(student => student.FirstName).ToList();
+                order = false;
+            }
+            else
+            {
+                StudentsList = StudentsList.OrderByDescending(students => students.FirstName).ToList();
+                order = true;
+            }
+        }
+          private void SortByLastName()
+    {
+        if (order == true)
+        {
+            StudentsList = StudentsList.OrderBy(student => student.LastName).ToList();
+            order = false;
+        }
+        else
+        {
+            StudentsList = StudentsList.OrderByDescending(students => students.LastName).ToList();
+            order = true;
+        }
+    }
+
+    private void SortByBirthDate()
+    {
+        if (order == true)
+        {
+            StudentsList = StudentsList.OrderBy(student => student.BirthDate).ToList();
+            order = false;
+        }
+        else
+        {
+            StudentsList = StudentsList.OrderByDescending(students => students.BirthDate).ToList();
+            order = true;
+        }
+    }
+
+    private void SortByStudies()
+    {
+        if (order == true)
+        {
+            StudentsList= StudentsList.OrderBy(student => student.Studies).ToList();
+            order = false;
+        }
+        else
+        {
+            StudentsList = StudentsList.OrderByDescending(students => students.Studies).ToList();
+            order = true;
+        }
+    }
+
+}
+

@@ -1,0 +1,77 @@
+﻿@page "/students/{ID:int}"
+@inject IStudentService service
+@inject NavigationManager navigationManager
+<h3>Student's Details</h3>
+  
+
+
+  <form action="/students" class="stud-form">
+<div class = "left"> 
+  <div>
+      <div class="form-group row">
+         <label  class="col-sm-2 col-form-label">First name:</label>
+            <div class="col-sm-5">
+            <input type="text" class="form-control" id="inputFirstName" @bind = "student.FirstName">
+              </div>
+      </div>
+
+  <div class="form-group row">
+    <label  class="col-sm-2 col-form-label">Last name:</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputLastName"  @bind="student.LastName">
+    </div>
+  </div>
+
+   <div class="form-group row">
+    <label  class="col-sm-2 col-form-label">Birthdate:</label>
+    <div class="col-sm-5">
+      <input type="date" class="form-control" id="inputBirthDate" @bind="student.BirthDate">
+    </div>
+    </div>
+
+
+     <div class="form-group row">
+            <label  class="col-sm-2 col-form-label">Studies:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="inputStudies" @bind="student.Studies">
+            </div>
+    </div>
+          </div>
+    
+             <button type="submit" class="btn btn-primary">Return</button>
+          </div>    
+
+          <div class = "right">
+         
+                  <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">Avatar:</label>
+                     <div class="col-sm-5">
+                 <input type="text" class="form-control" id="inputFirstName" @bind = "student.Avatar">
+      <img id = "studentAvatar" src="@student.Avatar" title="student's avatar'">
+    </div>
+  </div>
+
+        </div>
+        
+
+
+         
+    </form>
+   
+
+
+    
+
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+    public Student student;
+
+     protected override void OnInitialized()
+    {
+        student = service.GetStudent(ID);
+    } 
+
+}
